@@ -1,0 +1,7 @@
+
+cd67505a49adf506cbf130f340338ff6  leptonica-1.71.tgz
+a598635d47c2554290724d4099cacfbc  opencv3.0_with_contrib_2.tar.gz
+0f75238d260c11cff0b27e96ecd9f1c3  tesseract_2.tar.gz
+b7be0e1dba494d71b3cd49580206058f  tessdata-slim_2.tar.gz
+0ba34dd142b8ae616d08caa963ccd3d2  gs9_2.tar.gz
+a83b5f7fb5480d985916973f5f38e614  python-gs_2.tar.gz

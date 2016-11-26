@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+# This script serves as the Pylibmc build step of the
+# [**Python Buildpack**](https://github.com/cloudfoundry/python-buildpack)
+# compiler.
+#
+# This script is invoked by [`bin/compile`](/).
+
+# The location of the pre-compiled libmemcached binary.
+
+#I don't know what the purpose of this vendored link is. Not sure if I need it for what I'm doing. 
+#so I'm putting the same link from manifest.yml here. 
+VENDORED_TESSDATA="https://s3.amazonaws.com/labsdeps/tessdata-slim_2.tar.gz"
+
+# Syntax sugar.
+source $BIN_DIR/utils
+
+
+bpwatch start tessdata_install
+
+if [ ! -e ".heroku/vendor/share/tessdata/eng.traineddata" ]; then
+  echo "-----> Bootstrapping Tessdata."
+  mkdir -p .heroku/vendor/share/tessdata
+  translated_url=`translate_dependency_url $VENDORED_TESSDATA`
+  filtered_url=`filter_dependency_url $translated_url`
+  echo "Downloaded [$filtered_url]"
+  curl $translated_url -s | tar zxv -C .heroku/vendor/share/tessdata --strip-components 1 &> /dev/null
+fi
+
+export TESSDATA=.heroku/vendor/share/tessdata
+
+bpwatch stop tessdata_install

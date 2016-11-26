@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# This script serves as the Pylibmc build step of the
+# [**Python Buildpack**](https://github.com/cloudfoundry/python-buildpack)
+# compiler.
+#
+# This script is invoked by [`bin/compile`](/).
+
+# The location of the pre-compiled libmemcached binary.
+
+#I don't know what the purpose of this vendored link is. Not sure if I need it for what I'm doing. 
+#so I'm putting the same link from manifest.yml here. 
+VENDORED_LEPTONICA="https://s3.amazonaws.com/labsdeps/leptonica-1.71.tgz"
+
+# Syntax sugar.
+source $BIN_DIR/utils
+
+
+bpwatch start leptonica_install
+
+if [ ! -e ".heroku/vendor/lib/labs-leptonica-1.71/lib/lept.so.4.0.2" ]; then
+  echo "-----> Bootstrapping leptonica."
+  mkdir -p .heroku/vendor
+
+  translated_url=`translate_dependency_url $VENDORED_LEPTONICA`
+  filtered_url=`filter_dependency_url $translated_url`
+  echo "Downloaded [$filtered_url]"
+  curl $translated_url -s | tar zxv -C .heroku/vendor &> /dev/null
+fi
+
+export LEPTONICA=$(pwd)/vendor
+
+bpwatch stop leptonica_install
