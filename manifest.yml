@@ -1,66 +1,79 @@
 ---
-language: go
+language: siftlib
 default_versions:
-- name: go
-  version: 1.6.3
+  - name: siftlib
+    version: 0.0.1
 url_to_dependency_map:
-- match: go(\d+\.\d+(.*))
-  name: go
-  version: "$1"
-- match: godep
-  name: godep
-  version: v74
-- match: glide
-  name: glide
-  version: v0.11.0
+  - match: siftlib
+    name: siftlib
+    version: 0.0.1
+  - match: leptonica
+    name: leptonica
+    version: 1.71
+  - match: opencv
+    name: opencv
+    version: 3.0
+  - match: tesseract
+    name: tesseract
+    version: 3.0
+  - match: tessdata
+    name: tessdata
+    version: 3.0
+  - match: gs9
+    name: gs9
+    version: 9.0
+  - match: python-gs
+    name: python-gs
+    version: 9.1
+
 dependencies:
-- name: go
-  version: 1.5.3
-  uri: https://storage.googleapis.com/golang/go1.5.3.linux-amd64.tar.gz
-  md5: 31717324cabc5f8c537deee00a5a2b3c
-  cf_stacks:
-  - cflinuxfs2
-- name: go
-  version: 1.5.4
-  uri: https://storage.googleapis.com/golang/go1.5.4.linux-amd64.tar.gz
-  md5: 27b1c469797292064c65c995ffe30386
-  cf_stacks:
-  - cflinuxfs2
-- name: go
-  version: 1.6.3
-  uri: https://storage.googleapis.com/golang/go1.6.3.linux-amd64.tar.gz
-  md5: 804291a6ffdafe3749b4cda60255dba6
-  cf_stacks:
-  - cflinuxfs2
-- name: go
-  version: 1.6.2
-  uri: https://storage.googleapis.com/golang/go1.6.2.linux-amd64.tar.gz
-  md5: ebfb8b38330c8779b121c43433c4b9be
-  cf_stacks:
-  - cflinuxfs2
-- name: godep
-  version: v74
-  uri: https://buildpacks.cloudfoundry.org/concourse-binaries/godep/godep-v74-linux-x64.tgz
-  md5: 70220eee9f9e654e0b85887f696b6add
-  cf_stacks:
-  - cflinuxfs2
-- name: glide
-  version: v0.11.0
-  uri: https://buildpacks.cloudfoundry.org/concourse-binaries/glide/glide-v0.11.0-linux-x64.tgz
-  md5: f17d6c3c8dd4dc5f7b3b6364c3ddc7c0
-  cf_stacks:
-  - cflinuxfs2
+  - name: siftlib
+    version: 0.0.1
+    cf_stacks:
+      - cflinuxfs2
+  - name: leptonica
+    version: 1.71
+    cf_stacks:
+      - cflinuxfs2
+    uri: https://s3.amazonaws.com/labsdeps/leptonica-1.71.tgz
+    md5: cd67505a49adf506cbf130f340338ff6
+  - name: opencv
+    version: 3.0
+    cf_stacks:
+      - cflinuxfs2
+    uri: https://s3.amazonaws.com/labsdeps/opencv3.0_with_contrib_2.tar.gz
+    md5: a598635d47c2554290724d4099cacfbc
+  - name: tesseract
+    version: 3.0
+    cf_stacks:
+      - cflinuxfs2
+    uri: https://s3.amazonaws.com/labsdeps/tesseract_2.tar.gz
+    md5: 0f75238d260c11cff0b27e96ecd9f1c3
+  - name: tessdata
+    version: 3.0
+    cf_stacks:
+      - cflinuxfs2
+    uri: https://s3.amazonaws.com/labsdeps/tessdata-slim_2.tar.gz
+    md5: b7be0e1dba494d71b3cd49580206058f
+  - name: gs9
+    version: 9.0
+    cf_stacks:
+      - cflinuxfs2
+    uri: https://s3.amazonaws.com/labsdeps/gs9_2.tar.gz
+    md5: 0ba34dd142b8ae616d08caa963ccd3d2
+  - name: python-gs
+    version: 9.1
+    cf_stacks:
+      - cflinuxfs2
+    uri: https://s3.amazonaws.com/labsdeps/python-gs_2.tar.gz
+    md5: a83b5f7fb5480d985916973f5f38e614
 exclude_files:
-- ".git/"
-- ".gitignore"
-- ".gitmodules"
-- cf_spec/
-- log/
-- bin/package
-- buildpack-packager/
-- test-godir/
-- test/
-- Makefile
-- PULL_REQUEST_TEMPLATE
-- ISSUE_TEMPLATE
-- go_buildpack-*v*.zip
+  - .git/
+  - .gitignore
+  - .gitmodules
+  - cf_spec/
+  - log/
+  - test/
+  - bin/package
+  - buildpack-packager/
+  - siftlib_buildpack-*v*.zip
