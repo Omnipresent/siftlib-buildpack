@@ -1,26 +1,79 @@
 ---
-language: osgeolib
+language: siftlib
 default_versions:
-  - name: osgeolib
+  - name: siftlib
     version: 0.0.1
-exclude_files:
-- ".git/"
-- ".gitignore"
-- ".gitmodules"
-- ".rspec"
-- cf_spec/
-- log/
-- test/
-- buildpack-packager/
-- osgeolib_buildpack-*v*.zip
 url_to_dependency_map:
-- match: geos.tar.gz
-  name: osgeo-lib
-  version: 0.0.1
+  - match: siftlib
+    name: siftlib
+    version: 0.0.1
+  - match: leptonica
+    name: leptonica
+    version: 1.71
+  - match: opencv
+    name: opencv
+    version: 3.0
+  - match: tesseract
+    name: tesseract
+    version: 3.0
+  - match: tessdata
+    name: tessdata
+    version: 3.0
+  - match: gs9
+    name: gs9
+    version: 9.0
+  - match: python-gs
+    name: python-gs
+    version: 9.1
+
 dependencies:
-  - name: osgeolib
+  - name: siftlib
     version: 0.0.1
     cf_stacks:
       - cflinuxfs2
-    uri: https://s3.amazonaws.com/boundless-cloudfoundry/cflinuxfs2/osgeolib-0.0.1-linux-x64.tar.gz
-    md5: 257a4f3c3afa9429d343e495df22a60a
+  - name: leptonica
+    version: 1.71
+    cf_stacks:
+      - cflinuxfs2
+    uri: https://s3.amazonaws.com/labsdeps/leptonica-1.71.tgz
+    md5: cd67505a49adf506cbf130f340338ff6
+  - name: opencv
+    version: 3.0
+    cf_stacks:
+      - cflinuxfs2
+    uri: https://s3.amazonaws.com/labsdeps/opencv3.0_with_contrib_2.tar.gz
+    md5: a598635d47c2554290724d4099cacfbc
+  - name: tesseract
+    version: 3.0
+    cf_stacks:
+      - cflinuxfs2
+    uri: https://s3.amazonaws.com/labsdeps/tesseract_2.tar.gz
+    md5: 0f75238d260c11cff0b27e96ecd9f1c3
+  - name: tessdata
+    version: 3.0
+    cf_stacks:
+      - cflinuxfs2
+    uri: https://s3.amazonaws.com/labsdeps/tessdata-slim_2.tar.gz
+    md5: b7be0e1dba494d71b3cd49580206058f
+  - name: gs9
+    version: 9.0
+    cf_stacks:
+      - cflinuxfs2
+    uri: https://s3.amazonaws.com/labsdeps/gs9_2.tar.gz
+    md5: 0ba34dd142b8ae616d08caa963ccd3d2
+  - name: python-gs
+    version: 9.1
+    cf_stacks:
+      - cflinuxfs2
+    uri: https://s3.amazonaws.com/labsdeps/python-gs_2.tar.gz
+    md5: a83b5f7fb5480d985916973f5f38e614
+exclude_files:
+  - .git/
+  - .gitignore
+  - .gitmodules
+  - cf_spec/
+  - log/
+  - test/
+  - bin/package
+  - buildpack-packager/
+  - siftlib_buildpack-*v*.zip
